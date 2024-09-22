@@ -178,7 +178,8 @@ class ClipSegNode:
         thresholded = torch.where(mask >= precision, 1., 0.)
         # import code
         # code.interact(local=locals())
-        return (thresholded.to(device=image.device), mask.to(device=image.device), thresholded.to(device=image.device),)
+        thresholded_device = thresholded.to(device=image.device)
+        return (thresholded_device, mask.to(device=image.device), thresholded_device,)
 
     def load_model(self):
         global cached_clipseg_model
