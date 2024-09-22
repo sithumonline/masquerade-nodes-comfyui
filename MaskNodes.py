@@ -129,8 +129,8 @@ class ClipSegNode:
             },
         }
 
-    RETURN_TYPES = ("IMAGE","IMAGE",)
-    RETURN_NAMES = ("thresholded_mask", "raw_mask",)
+    RETURN_TYPES = ("IMAGE","IMAGE","MASK",)
+    RETURN_NAMES = ("thresholded_mask", "raw_mask","thresholded_image",)
     FUNCTION = "get_mask"
 
     CATEGORY = "Masquerade Nodes"
@@ -178,7 +178,7 @@ class ClipSegNode:
         thresholded = torch.where(mask >= precision, 1., 0.)
         # import code
         # code.interact(local=locals())
-        return (thresholded.to(device=image.device), mask.to(device=image.device),)
+        return (thresholded.to(device=image.device), mask.to(device=image.device), thresholded.to(device=image.device),)
 
     def load_model(self):
         global cached_clipseg_model
